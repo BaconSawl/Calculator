@@ -1,11 +1,14 @@
 let number1 = "";
 let operator = "";
 let number2 = "";
+let resetDisplay = false;
 
 const digitBtn = document.querySelectorAll(".digit");
 const display = document.querySelector("#display");
 const operatorBtn = document.querySelectorAll(".operator"); 
 const equalBtn = document.querySelector(".equal");
+const clearBtn = document.querySelector(".clear");
+
 
 operatorBtn.forEach((button) => {
     button.addEventListener("click", () => {
@@ -16,6 +19,10 @@ operatorBtn.forEach((button) => {
 
 digitBtn.forEach((button) => {
     button.addEventListener("click", () => {
+        if (resetDisplay == true) {
+            display.textContent = "";
+            resetDisplay = false;
+        }
         // console.log(button.textContent);
 
         //display.append(button.textContent);
@@ -35,7 +42,15 @@ equalBtn.addEventListener("click", () => {
 
     display.textContent = "";
     display.append(result.toFixed(4)); // Round the number
+    resetDisplay = true;
 });
+
+clearBtn.addEventListener("click", () => {
+    number1 = "";
+    operator = "";
+    number2 = "";
+    display.textContent = "0";
+})
 
 function operate(number1, operator, number2) {
     switch (operator) {
