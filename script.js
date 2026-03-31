@@ -19,8 +19,12 @@ operatorBtn.forEach((button) => {
 
 digitBtn.forEach((button) => {
     button.addEventListener("click", () => {
+        // clear everything and start fresh, need to rewrite.
         if (resetDisplay == true) {
             display.textContent = "";
+            number1 = "";
+            operator = "";
+            number2 = "";
             resetDisplay = false;
         }
         // console.log(button.textContent);
