@@ -41,12 +41,17 @@ digitBtn.forEach((button) => {
 })
 
 equalBtn.addEventListener("click", () => {
-    const result = operate(Number(number1), operator, Number(number2));
-    console.log(result);
+    if (number2 == 0 && operator == "/") {
+        display.textContent = "Can't divide by zero!";
+        resetDisplay = true;
+    } else {
+        const result = operate(Number(number1), operator, Number(number2));
+        console.log(result);
 
-    display.textContent = "";
-    display.append(result.toFixed(4)); // Round the number
-    resetDisplay = true;
+        display.textContent = "";
+        display.append(result.toFixed(4)); // Round the number
+        resetDisplay = true;
+    }
 });
 
 clearBtn.addEventListener("click", () => {
