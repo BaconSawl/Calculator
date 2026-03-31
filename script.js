@@ -12,6 +12,23 @@ const clearBtn = document.querySelector(".clear");
 
 operatorBtn.forEach((button) => {
     button.addEventListener("click", () => {
+        if (resetDisplay === true ){
+            number1 = display.textContent;
+            number2 = "";
+            resetDisplay = false;
+        }
+        if (number1 && operator && !number2) {
+            operator = button.textContent;
+        } else if (number1 && number2 && operator) {
+            const result = operate(Number(number1), operator, Number(number2));
+            console.log(result);
+            // 
+            display.textContent = "";
+            display.append(Math.round(result * 100) / 100);
+            number1 = result;
+            number2 = "";
+        }
+        // Move these two down here fixed the problem somehow...
         display.textContent += button.textContent;
         operator = button.textContent;
     })
@@ -41,7 +58,9 @@ digitBtn.forEach((button) => {
 })
 
 equalBtn.addEventListener("click", () => {
-    if (number2 == 0 && operator == "/") {
+    if (!number1 || !operator || !number2) {
+        // Do nothing
+    } else if (number2 == 0 && operator == "/") {
         display.textContent = "Can't divide by zero!";
         resetDisplay = true;
     } else {
@@ -49,8 +68,12 @@ equalBtn.addEventListener("click", () => {
         console.log(result);
 
         display.textContent = "";
-        display.append(result.toFixed(4)); // Round the number
+        display.append(Math.round(result * 100) / 100); // Round the number
+        number1 = result;
+        operator = "";
+        number2 = "";
         resetDisplay = true;
+
     }
 });
 
@@ -58,7 +81,7 @@ clearBtn.addEventListener("click", () => {
     number1 = "";
     operator = "";
     number2 = "";
-    display.textContent = "0";
+    display.textContent = "";
 })
 
 function operate(number1, operator, number2) {
