@@ -8,7 +8,7 @@ const display = document.querySelector("#display");
 const operatorBtn = document.querySelectorAll(".operator"); 
 const equalBtn = document.querySelector(".equal");
 const clearBtn = document.querySelector(".clear");
-
+const dotBtn = document.querySelector(".dot");
 
 operatorBtn.forEach((button) => {
     button.addEventListener("click", () => {
@@ -82,6 +82,29 @@ clearBtn.addEventListener("click", () => {
     operator = "";
     number2 = "";
     display.textContent = "";
+})
+
+dotBtn.addEventListener("click", () => {
+    if (!operator) {
+        // User is typing in number1
+        if (!(String(number1).includes("."))) {
+            if (!String.number1) {
+                number1 += "0.";
+                display.textContent += "0.";
+            } else {
+            number1 += ".";
+            display.textContent += ".";
+            }
+
+        }
+    } else {
+        // User is typing in number2
+        if (!(String(number2).includes("."))) {
+            number2 += ".";
+            display.textContent += ".";
+        }
+    }
+    resetDisplay = false;
 })
 
 function operate(number1, operator, number2) {
