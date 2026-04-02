@@ -9,6 +9,8 @@ const operatorBtn = document.querySelectorAll(".operator");
 const equalBtn = document.querySelector(".equal");
 const clearBtn = document.querySelector(".clear");
 const dotBtn = document.querySelector(".dot");
+const delBtn = document.querySelector(".DEL");
+
 
 operatorBtn.forEach((button) => {
     button.addEventListener("click", () => {
@@ -88,14 +90,8 @@ dotBtn.addEventListener("click", () => {
     if (!operator) {
         // User is typing in number1
         if (!(String(number1).includes("."))) {
-            if (!String.number1) {
-                number1 += "0.";
-                display.textContent += "0.";
-            } else {
             number1 += ".";
             display.textContent += ".";
-            }
-
         }
     } else {
         // User is typing in number2
@@ -103,6 +99,16 @@ dotBtn.addEventListener("click", () => {
             number2 += ".";
             display.textContent += ".";
         }
+    }
+    resetDisplay = false;
+})
+
+delBtn.addEventListener("click", () => {
+    display.textContent = display.textContent.slice(0, -1);
+    if (!operator) {
+        number1 = String(number1).slice(0, -1);
+    } else {
+        number2 = String(number2).slice(0, -1);
     }
     resetDisplay = false;
 })
